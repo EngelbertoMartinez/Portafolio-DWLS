@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <%- include('../includes/head') %>
+  </head>
+  <body>
+    <%- include('../includes/header') %>
+
+    <main class="mt-5" style="margin-top: 80px !important">
+      <div class="container">
+        <h2 class="text-center">Planifica tu Viaje</h2>
+
+        <form action="/reservar" method="POST" class="mt-4">
+
+          <input class="form-control mb-3" type="text" name="nombre" placeholder="Nombre" required>
+
+          <input class="form-control mb-3" type="email" name="email" placeholder="Email" required>
+
+          <select class="form-control mb-3" name="destino">
+            <% destinos.forEach(destino => { %>
+              <option><%= destino.nombre %></option>
+            <% }) %>
+          </select>
+
+          <textarea class="form-control mb-3" name="mensaje" placeholder="Mensaje"></textarea>
+
+          <button class="btn btn-success">Enviar</button>
+
+        </form>
+      </div>
+    </main>
+
+    <%- include('../includes/scripts') %>
+  </body>
+</html>

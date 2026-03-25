@@ -1,0 +1,19 @@
+{
+  "name": "plantilla-ejs",
+  "version": "1.0.0",
+  "description": "Este proyecto es una aplicación web completa que demuestra la implementación del motor de plantillas **EJS (Embedded JavaScript)** con **Express.js** y **Node.js**. La aplicación incluye un sistema de navegación responsivo, múltiples páginas y manejo de datos dinámicos.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {},
+  "type": "commonjs"
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <%- include('includes/head') %>
+
+    <style>
+      .hero {
+        background-image: url('/public-resource/imgs/playa.png');
+        background-size: cover;
+        background-position: center;
+        height: 90vh;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 40px;
+        border-radius: 10px;
+      }
+
+      .categoria-card img {
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('includes/header') %>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="overlay">
+        <h1>Tu Próxima Aventura</h1>
+        <p>Descubre el mundo con ExploraX</p>
+        <a href="/informacion" class="btn btn-light mt-3">
+          Ver Destinos
+        </a>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <div class="container mt-5 text-center">
+      <h2>Categorías</h2>
+
+      <div class="row mt-4">
+
+        <div class="col-md-4">
+          <div class="card categoria-card">
+            <img src="/public-resource/imgs/montana.png" class="card-img-top">
+            <div class="card-body">
+              <h5>Montaña</h5>
+              <p>Aventuras en alturas</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card categoria-card">
+            <img src="/public-resource/imgs/playa.png" class="card-img-top">
+            <div class="card-body">
+              <h5>Playa</h5>
+              <p>Relájate junto al mar</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card categoria-card">
+            <img src="/public-resource/imgs/selva.png" class="card-img-top">
+            <div class="card-body">
+              <h5>Selva</h5>
+              <p>Explora lo salvaje</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TESTIMONIOS -->
+    <div class="container mt-5 text-center">
+      <h2>Testimonios</h2>
+
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <p>"Una experiencia increíble"</p>
+          <small>- Ana</small>
+        </div>
+
+        <div class="col-md-4">
+          <p>"Todo perfecto y organizado"</p>
+          <small>- Luis</small>
+        </div>
+
+        <div class="col-md-4">
+          <p>"Viajaría otra vez sin duda"</p>
+          <small>- Carla</small>
+        </div>
+      </div>
+    </div>
+
+    <%- include('includes/scripts') %>
+  </body>
+</html>
