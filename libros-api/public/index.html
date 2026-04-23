@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Libros</title>
+</head>
+<body>
+
+<h2>Registrar Libro</h2>
+
+<form id="formLibro">
+  <input type="text" id="titulo" placeholder="Título" required><br><br>
+  <input type="text" id="autor" placeholder="Autor" required><br><br>
+  <input type="text" id="isbn" placeholder="ISBN" required><br><br>
+  <input type="number" id="publicacion" placeholder="Año" required><br><br>
+  <input type="number" id="precio" placeholder="Precio" required><br><br>
+  <button type="submit">Guardar</button>
+</form>
+
+<h2>Lista de Libros</h2>
+<ul id="lista"></ul>
+
+<script>
+const form = document.getElementById('formLibro');
+const lista = document.getElementById('lista');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const libro = {
+    titulo: titulo.value,
+    autor: autor.value,
+    isbn: isbn.value,
+    publicacion: parseInt(publicacion.value),
+    precio: parseFloat(precio.value)
+  };
+
+  await fetch('http://localhost:3000/Libros', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(libro)
+  });
+
+  form.reset();
+  cargarLibros();
+});
+
+async function cargarLibros() {
+  const res = await fetch('http://localhost:3000/Listado');
+  const data = await res.json();
+
+  lista.innerHTML = '';
+  data.forEach(libro => {
+    const li = document.createElement('li');
+    li.textContent = `${libro.titulo} - ${libro.autor} ($${libro.precio})`;
+    lista.appendChild(li);
+  });
+}
+
+cargarLibros();
+</script>
+
+</body>
+</html>
