@@ -13,6 +13,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET por IDs
+router.get('/:id', async (req, res) => {
+  try {
+    const producto = await Product.findById(req.params.id);
+
+    if (!producto) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+
+    res.json(producto);
+  } catch (error) {
+    res.status(400).json({ error: 'ID inválido' });
+  }
+});
+
 // POST
 router.post('/', auth, async (req, res) => {
   try {
