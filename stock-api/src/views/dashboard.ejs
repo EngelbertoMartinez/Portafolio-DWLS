@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard Stock</title>
+
+<style>
+
+table{
+
+border-collapse:collapse;
+width:100%;
+
+}
+
+th,td{
+
+padding:10px;
+border:1px solid black;
+text-align:center;
+
+}
+
+.critico{
+
+background:red;
+color:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Panel de Inventario</h1>
+
+<table>
+
+<tr>
+
+<th>Producto</th>
+<th>Cantidad</th>
+<th>Umbral</th>
+<th>Alerta</th>
+
+</tr>
+
+<% productos.forEach(producto=>{ %>
+
+<tr class="<%= producto.cantidad<producto.umbralMinimo ? 'critico':'' %>">
+
+<td><%= producto.nombre %></td>
+
+<td><%= producto.cantidad %></td>
+
+<td><%= producto.umbralMinimo %></td>
+
+<td>
+
+<%= producto.estadoAlerta ? 'Activa':'Normal' %>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</table>
+
+</body>
+
+</html>

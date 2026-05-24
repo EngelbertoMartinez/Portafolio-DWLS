@@ -40,17 +40,42 @@ router.post('/', auth, async (req, res) => {
 });
 
 // PATCH
-router.patch('/:id', auth, async (req, res) => {
-  try {
-    const producto = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
+router.patch('/:id',auth,async(req,res)=>{
+
+try{
+
+    const datos=req.body;
+
+    if(datos.cantidad!==undefined){
+
+        const producto=await Product.findById(
+            req.params.id
+        );
+
+        if(
+            datos.cantidad>=producto.umbralMinimo
+        ){
+            datos.estadoAlerta=false;
+        }
+
+    }
+
+    const actualizado=
+    await Product.findByIdAndUpdate(
+        req.params.id,
+        datos,
+        { returnDocument: 'after' }
     );
-    res.json(producto);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al actualizar producto' });
-  }
+
+    res.json(actualizado);
+
+}
+catch(error){
+
+res.status(500).json(error);
+
+}
+
 });
 
 // DELETE
