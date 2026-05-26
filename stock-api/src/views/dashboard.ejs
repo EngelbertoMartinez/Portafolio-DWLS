@@ -1,31 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Dashboard Stock</title>
+<title>StockAlert Dashboard</title>
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+
+background:#f4f7fb;
+padding:30px;
+
+}
+
+.header{
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+padding:30px;
+
+border-radius:20px;
+
+color:white;
+
+margin-bottom:30px;
+
+box-shadow:0px 10px 20px rgba(0,0,0,.1);
+
+}
+
+.header h1{
+
+font-size:35px;
+margin-bottom:10px;
+
+}
+
+.header p{
+
+opacity:.9;
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0px 5px 15px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+font-size:15px;
+
+color:#777;
+
+margin-bottom:10px;
+
+}
+
+.card span{
+
+font-size:35px;
+
+font-weight:bold;
+
+color:#2563eb;
+
+}
+
+.table-container{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0px 5px 15px rgba(0,0,0,.08);
+
+}
+
 table{
 
-border-collapse:collapse;
 width:100%;
 
+border-collapse:collapse;
+
 }
 
-th,td{
+th{
 
-padding:10px;
-border:1px solid black;
+padding:15px;
+
+background:#2563eb;
+
+color:white;
+
+}
+
+td{
+
+padding:15px;
+
 text-align:center;
 
+border-bottom:1px solid #ddd;
+
 }
 
-.critico{
+.badge-normal{
 
-background:red;
-color:white;
+background:#dcfce7;
+
+color:#15803d;
+
+padding:8px 15px;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+.badge-alerta{
+
+background:#fee2e2;
+
+color:#dc2626;
+
+padding:8px 15px;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+.stock-bajo{
+
+background:#fff1f2;
 
 }
 
@@ -35,32 +180,121 @@ color:white;
 
 <body>
 
-<h1>Panel de Inventario</h1>
+
+<div class="header">
+
+<h1>📦 StockAlert Dashboard</h1>
+
+<p>Monitoreo automático de inventario</p>
+
+</div>
+
+
+
+<div class="cards">
+
+<div class="card">
+
+<h2>Total Productos</h2>
+
+<span><%= productos.length %></span>
+
+</div>
+
+
+<div class="card">
+
+<h2>Stock crítico</h2>
+
+<span>
+
+<%= productos.filter(p=>p.cantidad<p.umbralMinimo).length %>
+
+</span>
+
+</div>
+
+
+<div class="card">
+
+<h2>Alertas activas</h2>
+
+<span>
+
+<%= productos.filter(p=>p.estadoAlerta).length %>
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="table-container">
+
+<h2 style="margin-bottom:20px">
+
+📊 Inventario
+
+</h2>
 
 <table>
 
 <tr>
 
 <th>Producto</th>
+
 <th>Cantidad</th>
+
 <th>Umbral</th>
-<th>Alerta</th>
+
+<th>Estado</th>
 
 </tr>
 
+
 <% productos.forEach(producto=>{ %>
 
-<tr class="<%= producto.cantidad<producto.umbralMinimo ? 'critico':'' %>">
-
-<td><%= producto.nombre %></td>
-
-<td><%= producto.cantidad %></td>
-
-<td><%= producto.umbralMinimo %></td>
+<tr class="<%= producto.cantidad<producto.umbralMinimo ? 'stock-bajo':'' %>">
 
 <td>
 
-<%= producto.estadoAlerta ? 'Activa':'Normal' %>
+<%= producto.nombre %>
+
+</td>
+
+<td>
+
+<%= producto.cantidad %>
+
+</td>
+
+<td>
+
+<%= producto.umbralMinimo %>
+
+</td>
+
+<td>
+
+<% if(producto.estadoAlerta){ %>
+
+<span class="badge-alerta">
+
+⚠ Stock crítico
+
+</span>
+
+<% }else{ %>
+
+<span class="badge-normal">
+
+✓ Normal
+
+</span>
+
+<% } %>
 
 </td>
 
@@ -69,6 +303,8 @@ color:white;
 <% }) %>
 
 </table>
+
+</div>
 
 </body>
 
